@@ -54,7 +54,7 @@ export const createUser = async ({ user }: { user: User }) => {
     return newUser;
   } catch (error: any) {
     if (error.code === 11000) {
-      throw new Error("User already exists");
+      throw new Error("User validation failed: email: Email already exists");
     }
     return error;
   }

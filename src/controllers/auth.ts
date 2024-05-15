@@ -19,7 +19,19 @@ export const register = async (req: Request, res: Response) => {
 
   try {
     await createUser({ user });
-    res.status(201).send({ user });
+    const token = jwt.sign(
+      { id: user.id },
+      process.env.JWT_SECRET || "",
+
+      {
+        expiresIn: "15m",
+      }
+    );
+
+    res.header("Authorization", `Bearer ${token}`);
+    res
+      .status(201)
+      .send({ user: { id: user.id, email: user.email, name: user.name } });
   } catch (error: any) {
     res.status(400).send({
       message: error.message,
@@ -33,13 +45,15 @@ export const login = async (req: Request, res: Response) => {
   const user = await User.findOne({ email });
 
   if (!user) {
-    return res.status(400).send("User not found");
+    return res.status(400).send({
+      errorMessage: "User not found",
+    });
   }
 
   const valid = await bcrypt.compare(password, user.password);
 
   if (!valid) {
-    return res.status(400).send("Invalid password");
+    return res.status(400).send({ errorMessage: "Invalid password" });
   }
 
   const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET || "", {
@@ -58,5 +72,5 @@ export const login = async (req: Request, res: Response) => {
 
 export const logout = async (req: Request, res: Response) => {
   res.header("Authorization", "");
-  res.send("Logged out");
+  res.status(200).send({ message: "Logged out" });
 };

@@ -9,7 +9,8 @@ export const cookieJwtAuth = async (
   res: Response,
   next: NextFunction
 ) => {
-  const tokenHeader = req.header("Authorization");
+  const tokenHeader = req.header("authorization");
+  console.log(tokenHeader);
   const token = tokenHeader && tokenHeader.split(" ")[1];
   if (!token) {
     return res.status(401).send("Access denied");
