@@ -1,5 +1,3 @@
-// Create a supertest test for the login endpoint
-
 import request from "supertest";
 import bcrypt from "bcrypt";
 import app from "../src/index";

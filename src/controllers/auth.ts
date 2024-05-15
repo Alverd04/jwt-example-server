@@ -1,5 +1,3 @@
-// Create the user controller
-
 import { Request, Response } from "express";
 import User from "../models/user";
 import bcrypt from "bcrypt";
@@ -39,7 +37,7 @@ export const register = async (req: Request, res: Response) => {
     });
   }
 };
-// Login endpoint should return a JWT token and a refresh token
+
 export const login = async (req: Request, res: Response) => {
   const { email, password } = req.body;
 

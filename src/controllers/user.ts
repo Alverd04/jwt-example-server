@@ -1,4 +1,3 @@
-// Create the user controller
 import UserSchema, { User } from "../models/user";
 
 export const getUser = async ({ user }: { user: User }) => {
