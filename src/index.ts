@@ -31,17 +31,9 @@ app.get("/", (_: Request, res: Response) => {
   res.send("Express + TypeScript Server");
 });
 
-app.get("/secureRoute", cookieJwtAuth, (req: Request, res: Response) => {
-  res.send("Secure route");
-});
-
-app.get("/user/:userId", cookieJwtAuth, (req: Request, res: Response) => {
-  res.status(200).send({
-    user: {
-      id: "123617283",
-      email: "req.user.email",
-      name: "req.user.name",
-    },
+app.get("/protectedRoute", cookieJwtAuth, (req: Request, res: Response) => {
+  res.send({
+    message: "This is a protected route",
   });
 });
 

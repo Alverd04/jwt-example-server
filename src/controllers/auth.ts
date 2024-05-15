@@ -1,7 +1,7 @@
 // Create the user controller
 
 import { Request, Response } from "express";
-import User from "../entities/user";
+import User from "../models/user";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { createUser } from "./user";
@@ -29,9 +29,10 @@ export const register = async (req: Request, res: Response) => {
     );
 
     res.header("Authorization", `Bearer ${token}`);
-    res
-      .status(201)
-      .send({ user: { id: user.id, email: user.email, name: user.name } });
+    res.status(201).send({
+      message: "User registered successfully",
+      user: { id: user.id, email: user.email, name: user.name },
+    });
   } catch (error: any) {
     res.status(400).send({
       message: error.message,
@@ -62,6 +63,7 @@ export const login = async (req: Request, res: Response) => {
 
   res.header("Authorization", `Bearer ${token}`);
   res.status(200).send({
+    message: "User logged in successfully",
     user: {
       id: user.id,
       email: user.email,

@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
-import User from "../entities/user";
+import User from "../models/user";
 
 // This middleware will check if the user has a valid JWT token in the Authorization header and refresh token in the Refresh-Token header.
 

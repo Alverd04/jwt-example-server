@@ -4,7 +4,7 @@ import request from "supertest";
 import bcrypt from "bcrypt";
 import app from "../src/index";
 import mongoose from "mongoose";
-import UserSchema from "../src/entities/user";
+import UserSchema from "../src/models/user";
 
 describe("Auth Login", () => {
   beforeEach(async () => {
